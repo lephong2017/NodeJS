@@ -1,14 +1,61 @@
 
 var list;
 class Note extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={onEdit:false};
+    this.delete = this.delete.bind(this);
+    this.edit = this.edit.bind(this);
+    this.save = this.save.bind(this);
+    this.cancel = this.cancel.bind(this);
+  }
+
+  save(){
+    var addtitle = this.refs.title.value;
+    var addcontents = this.refs.contents.value;
+
+    $.post("/updateNote",{idEdit:this.props.id,title: addtitle, contents:addcontents}, function(data){
+      list.setState({ListOfNote: data});
+    });
+    this.setState({onEdit:false});
+  }
+  cancel(){
+    this.setState({onEdit:false});
+  }
+
+  edit(){
+    this.setState({onEdit:true});
+  }
+
+  delete(){
+    $.post("/delNote",{idXoa:this.props.id}, function(data){
+      list.setState({ListOfNote: data});
+    });
+
+  }
   render(){
-    return(
-      <div className="note">
-        <p>{this.props.title}</p>
-        <p>{this.props.children}</p>
-        <p>................................................</p>
-      </div>
-    );
+    if(this.state.onEdit){
+      return(
+        <div className="note" >
+          <input defaultValue={this.props.title} ref="title"/>
+          <input defaultValue={this.props.children} ref="contents"/>
+          <p>................................................</p>
+          <button onClick={this.save} id="btn-save">Save</button>
+          <button onClick={this.cancel} id="btn-cancel">Cancel</button>
+        </div>
+      );
+    }else{
+      return(
+        <div className="note">
+          <p>{this.props.title}</p>
+          <p>{this.props.children}</p>
+          <p>................................................</p>
+          <button onClick={this.delete} id="btn-del">Delete</button>
+          <button onClick={this.edit} id="btn-edit">Edit</button>
+        </div>
+      );
+    }
+
   }
 }
 
@@ -66,7 +113,7 @@ class ListNote extends React.Component{
         <br/>
         {
           this.state.ListOfNote.map(function(note,index){
-            return <Note key={index} title={note.title}>{note.contents}</Note>
+            return <Note key={index} id={index} title={note.title}>{note.contents}</Note>
           })
         }
       </div>

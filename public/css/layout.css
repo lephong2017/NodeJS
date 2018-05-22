@@ -34,3 +34,17 @@ hr{
   float: right;
   padding-top: 2px;
 }
+#btn-del{
+  float:right;
+  background-color: blue;
+}
+#btn-edit{
+  float:right;
+  background-color: yellow;
+}#btn-save{
+  float:right;
+  background-color: pink;
+}#btn-cancel{
+  float:right;
+  background-color: green;
+}
