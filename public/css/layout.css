@@ -1,0 +1,36 @@
+.div_album{
+    width: 400px;
+    margin: 5px;
+    background-color: cyan;
+    border: solid 1px;
+    padding: 5px;
+}
+hr{
+  visibility: hidden;
+}
+.btn_quaylai{
+  margin-right: 5px;
+  background-color: green;
+}
+.btn_continutes{
+  background-color: red;
+}
+.note{
+  border:solid 5px green;
+  width:200px;
+  padding : 20px;
+  margin-top:20px;
+  border-radius: 3px;
+}
+.div-list{
+  border:solid 5px green;
+  width:250px;
+  padding : 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+#btn-list-add{
+  background-color: cyan;
+  float: right;
+  padding-top: 2px;
+}
